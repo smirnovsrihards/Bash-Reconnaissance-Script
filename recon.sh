@@ -80,7 +80,9 @@ echo -e "${YELLOW}[*] Traceroute To Destination...${NC}" | tee -a "${LOG_FILE}"
 
 echo "" >> "${LOG_FILE}"
 
-mtr -rw "${TARGET}" >> "${LOG_FILE}" || echo -e "${RED}[-] Network is down or ICMP ping disabled...${NC}" | tee -a "${LOG_FILE}"
+if ! mtr -rw "${TARGET}" >> "${LOG_FILE}"; then
+    echo -e "${RED}[-] Network is down or ICMP ping disabled...${NC}" | tee -a "${LOG_FILE}"
+fi
 
 echo "" >> "${LOG_FILE}"
 
