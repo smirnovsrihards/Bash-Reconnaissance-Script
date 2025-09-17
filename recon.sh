@@ -23,10 +23,7 @@ if [ -z "$1" ]; then
         exit 1
 fi
 
-### Ascii Banner ###
-figlet Recon Script
-
-depend_list=("curl" "mtr" "nmap" "dig" "subfinder")
+depend_list=("curl" "mtr" "nmap" "dig" "subfinder" "figlet")
 
 for prog in "${depend_list[@]}"; do
 	if ! command -v "$prog" > /dev/null 2>&1; then
@@ -36,10 +33,11 @@ for prog in "${depend_list[@]}"; do
       for not_inst in "${prog}"; do
         sudo apt install $not_inst -y > /dev/null 2>&1
       done
-	else
-		echo -e "${GREEN}[+] $prog is installed.${NC}"
 	fi
 done
+
+### Ascii Banner ###
+figlet Recon Script
 
 ### Aliases ###
 TARGET="$1"
